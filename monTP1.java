@@ -191,19 +191,22 @@ public class monTP1 {
                         double total;
                         if (achat_section_a) {
                             QTE = NB_PLACES_SECTIONA - nb_places_a;
-                            System.out.println(QTE + "      | A     |   " + QTE * PRIX_PLACE_SECTIONA + MONNAIE);
+                            //System.out.println(QTE + "      | A     |   " + QTE * PRIX_PLACE_SECTIONA + MONNAIE);
+                            System.out.printf("%-6d| %-7s | %9.2f $%n", QTE, "A", QTE * PRIX_PLACE_SECTIONA);
                             nb_billets_total = nb_billets_total + QTE;
                             // System.out.println();
                         }
                         if (achat_section_b) {
                             QTE = NB_PLACES_SECTIONB - nb_places_b;
-                            System.out.println(QTE + "      | B     |   " + QTE * PRIX_PLACE_SECTIONB + MONNAIE);
+                            //System.out.println(QTE + "      | B     |   " + QTE * PRIX_PLACE_SECTIONB + MONNAIE);
+                            System.out.printf("%-6d| %-7s | %9.2f $%n", QTE, "B", QTE * PRIX_PLACE_SECTIONB);
                             nb_billets_total = nb_billets_total + QTE;
                         }
                         if (achat_section_c) {
                             QTE = NB_PLACES_SECTIONC - nb_places_c;
                             nb_billets_total = nb_billets_total + QTE;
-                            System.out.println(QTE + "      | C     |   " + QTE * PRIX_PLACE_SECTIONC + MONNAIE);
+                            //System.out.println(QTE + "      | C     |   " + QTE * PRIX_PLACE_SECTIONC + MONNAIE);
+                            System.out.printf("%-6d| %-7s | %9.2f $%n", QTE, "C", QTE * PRIX_PLACE_SECTIONC);
                         }
 
                         if (nb_billets_total >= 5 && nb_billets_total <= 9)
@@ -217,13 +220,19 @@ public class monTP1 {
                         total += (NB_PLACES_SECTIONC - nb_places_c) * PRIX_PLACE_SECTIONC;
                         //arrondire au centieme toutes les valeurs sorties (pas celles utilisées pour les calculs)
                         System.out.println(SOUS_BANIERE_FACTURE);
-                        System.out.println(SOUS_TOTAL + total + MONNAIE);
-                        System.out.println(RABAIS + -(total * rabais) + MONNAIE);
+                        //System.out.println(SOUS_TOTAL + total + MONNAIE);
+                        System.out.printf("%16s %15s %9.2f $%n", "", "SOUS-TOTAL", total);
+                        //System.out.println(RABAIS + -(total * rabais) + MONNAIE);
+                        System.out.printf("%16s %15s %9.2f $%n", "", "RABAIS", -(total * rabais));
                         total -= total * rabais;
-                        System.out.println(TPS + total * TAUX_TPS + MONNAIE);
-                        System.out.println(TVQ + total * TAUX_TVQ + MONNAIE);
+                        //System.out.println(TPS + total * TAUX_TPS + MONNAIE);
+                        System.out.printf("%16s %15s %9.2f $%n", "", "TPS", total * TAUX_TPS);
+                        //System.out.println(TVQ + total * TAUX_TVQ + MONNAIE);
+                        System.out.printf("%16s %15s %9.2f $%n", "", "TVQ", total * TAUX_TVQ);
                         total += total * TAUX_TPS + total * TAUX_TVQ;
-                        System.out.println(TOTAL + total + MONNAIE);
+                        System.out.println();
+                        //System.out.println(TOTAL + total + MONNAIE);
+                        System.out.printf("%16s %15s %9.2f $%n", "", "TOTAL", total);
                     } else {
                         System.out.println("operation annulee");
                         menu_valide = false;
