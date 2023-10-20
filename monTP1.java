@@ -46,23 +46,21 @@ public class monTP1 {
             "QTE | SECTION | PRIX\n" +
             "----------------------------";
     public static final String SOUS_BANIERE_FACTURE = "============================";
-    public static final String SOUS_TOTAL = "      SOUS-TOTAL  ";
-    public static final String RABAIS = "          RABAIS  ";
-    public static final String TPS = "             TPS ";
-    public static final String TVQ = "             TVQ ";
-    public static final String TOTAL = "           TOTAL ";
     public static final String MONNAIE = " $";
 
     public static final String BANIERE_CONSULTATION_DES_VENTES= "-----------------------\n" + //
             "CONSULTATION DES VENTES\n" + //
             "-----------------------";
     public static final String STATISTIQUE_DES_VENTES= "Statistiques sur les ventes depuis la derniere reinitialisation.";
-    public static final String NOMBRE_DE_BILLETS_VENDUS = "NOMBRE DE BILLETS VENDUS :";
     public static final String CONSULTATION_VENTES_SECTIONA = "   - section A : ";
     public static final String CONSULTATION_VENTES_SECTIONB = "   - section B : ";
     public static final String CONSULTATION_VENTES_SECTIONC = "   - section C : ";    
     public static final String TOTAL_DES_VENTES="\nTOTAL DES VENTES : ";
-    // public static final String = "";
+    public static final String APPUYER_SUR_ENTREE = "Appuyez sur <ENTREE> pour revenir au menu...";
+    public static final String BANIERE_REINITIALISATION = "---------------------------------\n" +
+            "REINITIALISATION DE L'APPLICATION\n" +
+            "---------------------------------";
+    public static final String A_ETE_REINISTIALISEE = "L'application a ete reinitialisee.";
     public static final String FIN_DE_PROGRAMME = "F I N   N O R M A L E   D U   P R O G R A M M E";
 
     public static void main(String[] args) {
@@ -83,7 +81,6 @@ public class monTP1 {
                     boolean selection_valide = true;
                     do {
                         int nb_billets_demande;
-                        // imprimer les sections et le nombre correspondant de places
                         System.out.println("SECTIONS");
                         System.out.println(SECTIONA + " " + "[ " + nb_places_a + " place(s) ]");
                         System.out.println(SECTIONB + " " + "[ " + nb_places_b + " place(s) ]");
@@ -191,24 +188,20 @@ public class monTP1 {
                         double total;
                         if (achat_section_a) {
                             QTE = NB_PLACES_SECTIONA - nb_places_a;
-                            //System.out.println(QTE + "      | A     |   " + QTE * PRIX_PLACE_SECTIONA + MONNAIE);
                             System.out.printf("%-6d| %-7s | %9.2f $%n", QTE, "A", QTE * PRIX_PLACE_SECTIONA);
                             nb_billets_total = nb_billets_total + QTE;
-                            // System.out.println();
+
                         }
                         if (achat_section_b) {
                             QTE = NB_PLACES_SECTIONB - nb_places_b;
-                            //System.out.println(QTE + "      | B     |   " + QTE * PRIX_PLACE_SECTIONB + MONNAIE);
                             System.out.printf("%-6d| %-7s | %9.2f $%n", QTE, "B", QTE * PRIX_PLACE_SECTIONB);
                             nb_billets_total = nb_billets_total + QTE;
                         }
                         if (achat_section_c) {
                             QTE = NB_PLACES_SECTIONC - nb_places_c;
                             nb_billets_total = nb_billets_total + QTE;
-                            //System.out.println(QTE + "      | C     |   " + QTE * PRIX_PLACE_SECTIONC + MONNAIE);
                             System.out.printf("%-6d| %-7s | %9.2f $%n", QTE, "C", QTE * PRIX_PLACE_SECTIONC);
                         }
-
                         if (nb_billets_total >= 5 && nb_billets_total <= 9)
                             rabais = REDUCTION_5_9;
                         if (nb_billets_total >= 10 && nb_billets_total <= 24)
@@ -218,27 +211,19 @@ public class monTP1 {
                         total = (NB_PLACES_SECTIONA - nb_places_a) * PRIX_PLACE_SECTIONA;
                         total += (NB_PLACES_SECTIONB - nb_places_b) * PRIX_PLACE_SECTIONB;
                         total += (NB_PLACES_SECTIONC - nb_places_c) * PRIX_PLACE_SECTIONC;
-                        //arrondire au centieme toutes les valeurs sorties (pas celles utilisées pour les calculs)
                         System.out.println(SOUS_BANIERE_FACTURE);
-                        //System.out.println(SOUS_TOTAL + total + MONNAIE);
                         System.out.printf("%16s %15s %9.2f $%n", "", "SOUS-TOTAL", total);
-                        //System.out.println(RABAIS + -(total * rabais) + MONNAIE);
                         System.out.printf("%16s %15s %9.2f $%n", "", "RABAIS", -(total * rabais));
                         total -= total * rabais;
-                        //System.out.println(TPS + total * TAUX_TPS + MONNAIE);
                         System.out.printf("%16s %15s %9.2f $%n", "", "TPS", total * TAUX_TPS);
-                        //System.out.println(TVQ + total * TAUX_TVQ + MONNAIE);
                         System.out.printf("%16s %15s %9.2f $%n", "", "TVQ", total * TAUX_TVQ);
                         total += total * TAUX_TPS + total * TAUX_TVQ;
                         System.out.println();
-                        //System.out.println(TOTAL + total + MONNAIE);
                         System.out.printf("%16s %15s %9.2f $%n", "", "TOTAL", total);
                     } else {
                         System.out.println("operation annulee");
                         menu_valide = false;
                     }
-
-                    /* afficher facture si nb billet > 0 */
                     break;
                 case '2':
                     double total;
@@ -247,11 +232,12 @@ public class monTP1 {
                     System.out.println(CONSULTATION_VENTES_SECTIONA +  (NB_PLACES_SECTIONA - nb_places_a));
                     System.out.println(CONSULTATION_VENTES_SECTIONB +  (NB_PLACES_SECTIONB - nb_places_b));
                     System.out.println(CONSULTATION_VENTES_SECTIONC +  (NB_PLACES_SECTIONC - nb_places_c));
-                    //arrondire au centieme toutes les valeurs sorties (pas celles utilisées pour les calculs)
                     total = (NB_PLACES_SECTIONA - nb_places_a) * PRIX_PLACE_SECTIONA;
                     total += (NB_PLACES_SECTIONB - nb_places_b) * PRIX_PLACE_SECTIONB;
                     total += (NB_PLACES_SECTIONC - nb_places_c) * PRIX_PLACE_SECTIONC;
                     System.out.println(TOTAL_DES_VENTES + total + MONNAIE);
+                    System.out.println(APPUYER_SUR_ENTREE);
+                    Clavier.lireFinLigne();
                     //TODO: appuyer sur entree pour sortir
                     menu_valide = false;
                     break;
@@ -260,6 +246,8 @@ public class monTP1 {
                     nb_places_b = NB_PLACES_SECTIONB;
                     nb_places_c = NB_PLACES_SECTIONC;
                     nb_billets_total = 0;
+                    System.out.println(BANIERE_REINITIALISATION);
+                    System.out.println(A_ETE_REINISTIALISEE);
                     break;
                 case '4':
                     menu_valide = true;
@@ -272,6 +260,5 @@ public class monTP1 {
         } while (!menu_valide);
         System.out.println(FIN_DE_PROGRAMME);
 
-        return;
     }
 } // monTP1
